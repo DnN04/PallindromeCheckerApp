@@ -1,25 +1,30 @@
-
-
 import java.util.Scanner;
 
-public class UseCase9PalindromeCheckerApp {
+// Palindrome service class
+class PalindromeChecker {
 
-    // Recursive method to check palindrome
-    public static boolean isPalindrome(String str, int start, int end) {
+    // Method to check palindrome
+    public boolean checkPalindrome(String str) {
 
-        // Base condition: if pointers cross or meet
-        if (start >= end) {
-            return true;
+        int start = 0;
+        int end = str.length() - 1;
+
+        while (start < end) {
+
+            if (str.charAt(start) != str.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
         }
 
-        // If characters at start and end are not equal
-        if (str.charAt(start) != str.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call for the next inner characters
-        return isPalindrome(str, start + 1, end - 1);
+        return true;
     }
+}
+
+// Main application class
+public class UseCase11PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
@@ -28,7 +33,10 @@ public class UseCase9PalindromeCheckerApp {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        boolean result = isPalindrome(input, 0, input.length() - 1);
+        // Object creation (OOP concept)
+        PalindromeChecker checker = new PalindromeChecker();
+
+        boolean result = checker.checkPalindrome(input);
 
         if (result) {
             System.out.println("The string is a Palindrome.");
