@@ -39,7 +39,7 @@ public class UseCase11PalindromeCheckerApp {
         boolean result = checker.checkPalindrome(input);
 
         if (result) {
-            System.out.println("The string is a Palindrome.");
+            System.out.println("The string is a Palindrome (ignoring spaces and case).");
         } else {
             System.out.println("The string is NOT a Palindrome.");
         }
