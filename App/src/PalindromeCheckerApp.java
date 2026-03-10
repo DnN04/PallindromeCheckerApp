@@ -1,10 +1,9 @@
-import java.util.Scanner;
+import java.util.*;
 
-// Palindrome service class
-class PalindromeChecker {
+public class UseCase13PalindromeCheckerApp {
 
-    // Method to check palindrome
-    public boolean checkPalindrome(String str) {
+    // Method 1: Two-pointer approach
+    public static boolean twoPointerPalindrome(String str) {
 
         int start = 0;
         int end = str.length() - 1;
@@ -21,10 +20,25 @@ class PalindromeChecker {
 
         return true;
     }
-}
 
-// Main application class
-public class UseCase11PalindromeCheckerApp {
+    // Method 2: Stack-based approach
+    public static boolean stackPalindrome(String str) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : str.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (char c : str.toCharArray()) {
+
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public static void main(String[] args) {
 
@@ -33,16 +47,24 @@ public class UseCase11PalindromeCheckerApp {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        // Object creation (OOP concept)
-        PalindromeChecker checker = new PalindromeChecker();
+        // Measure Two-pointer algorithm
+        long start1 = System.nanoTime();
+        boolean result1 = twoPointerPalindrome(input);
+        long end1 = System.nanoTime();
+        long time1 = end1 - start1;
 
-        boolean result = checker.checkPalindrome(input);
+        // Measure Stack algorithm
+        long start2 = System.nanoTime();
+        boolean result2 = stackPalindrome(input);
+        long end2 = System.nanoTime();
+        long time2 = end2 - start2;
 
-        if (result) {
-            System.out.println("The string is a Palindrome (ignoring spaces and case).");
-        } else {
-            System.out.println("The string is NOT a Palindrome.");
-        }
+        System.out.println("\nResults:");
+        System.out.println("Two Pointer Result: " + result1);
+        System.out.println("Execution Time: " + time1 + " ns");
+
+        System.out.println("\nStack Method Result: " + result2);
+        System.out.println("Execution Time: " + time2 + " ns");
 
         scanner.close();
     }
